@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+// @ts-ignore
+import get from 'lodash.get'
 
 //#region types
 export interface Theme {
@@ -8,6 +10,7 @@ export interface Theme {
 }
 //#endregion
 
+//#region stylesheet creation
 const stylesheet = `
   html {
       background-color: $backgroundColor;
@@ -22,19 +25,57 @@ const stylesheet = `
   }
 `
 
+interface CSSVar {
+  path: string
+  default: string
+}
+
+const CSSVars = {
+  '$backgroundColor': {
+    path: 'background.color',
+    default: '#ffffff'
+  },
+  '$fontFamily': {
+    path: 'font.family',
+    default: 'sans-serif'
+  },
+  '$fontColor': {
+    path: 'font.color',
+    default: '#000000'
+  },
+  '$borderColor': {
+    path: 'border.color',
+    default: '#000000'
+  },
+  '$borderWidth': {
+    path: 'border.width',
+    default: '2px'
+  },
+  '$borderRadius': {
+    path: 'border.radius',
+    default: '0px'
+  }
+} as any
+
+const replaceCSSVar = (
+  stylesheet: string, 
+  theme: Theme, 
+  selector: string, 
+  cssvar: CSSVar
+) => {
+  const value = get(theme, cssvar.path, cssvar.default)
+  return value ? stylesheet.replace(selector, value) : stylesheet
+}
+
 function setTheme(theme: Theme) {
   const styleTag = document.createElement('style')
-  // TODO: Handle missing values
-  const css = stylesheet
-    .replace('$fontFamily', theme.font.family)
-    .replace('$fontColor', theme.font.color)
-    .replace('$backgroundColor', theme.background.color)
-    .replace('$borderColor', theme.border.color)
-    .replace('$borderWidth', theme.border.width)
-    .replace('$borderRadius', theme.border.radius)
+  const css = Object.entries(CSSVars).reduce((updatedStylesheet, [selector, cssvar]) => {
+    return replaceCSSVar(updatedStylesheet, theme, selector, cssvar as CSSVar)
+  }, stylesheet)
   styleTag.appendChild(document.createTextNode(css))
   document.head.appendChild(styleTag)
 }
+//#endregion
 
 export const useStylesheet = (theme?: Theme) => {
   useEffect(() => {
