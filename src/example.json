@@ -1,0 +1,26 @@
+{
+    "version": "1.0.0",
+    "theme": {
+        "font": {
+            "family": "sans-serif",
+            "color": "#ffffff"
+        },
+        "background": {
+            "color": "#00b894"
+        },
+        "border": {
+            "color": "#55efc4",
+            "width": "2px",
+            "radius": "16px"
+        }
+    },
+    "links": [{
+        "title": "bencentra.com",
+        "description": "Some more words",
+        "href": "https://bencentra.com"
+    }, {
+        "title": "Ben's Beer Blog",
+        "description": "Some more words",
+        "href": "https://bencentra.com/beer"
+    }]
+}

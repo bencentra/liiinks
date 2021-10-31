@@ -1,0 +1,21 @@
+{
+  "name": "liiinks",
+  "version": "1.0.0",
+  "description": "Simple link webpage builder based on a JSON format",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "NODE_ENV=production && npm run build:css",
+    "build:css": "npx tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bencentra/liiinks.git"
+  },
+  "author": "Ben Centra <blcentra@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bencentra/liiinks/issues"
+  },
+  "homepage": "https://github.com/bencentra/liiinks#readme"
+}
