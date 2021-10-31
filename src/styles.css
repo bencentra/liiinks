@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+#links {
+    width: 100%;
+    padding: 0.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+    #links {
+        width: 1024px;
+        padding: 0.75rem;
+        margin: auto;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+.link {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+.link div:first-child {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
